@@ -51,6 +51,7 @@ if ( ! function_exists( 'modway_shoes_setup' ) ) :
 		register_nav_menus(
 			array(
 				'primary' => esc_html__( 'Primary', 'modway-shoes' ),
+				'top' => esc_html__( 'Top', 'modway-shoes' ),
 			)
 		);
 
@@ -150,6 +151,7 @@ function modway_shoes_scripts() {
 	wp_enqueue_style( 'modway-shoes-style', get_stylesheet_uri(), array(), _S_VERSION );
 
 	wp_enqueue_script( 'modway-shoes-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'modway-shoes-menu-toggle', get_template_directory_uri() . '/js/menu-toggle.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

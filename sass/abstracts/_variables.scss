@@ -1,0 +1,15 @@
+// COLOURS
+$white: #fff;
+$black: #000;
+
+// NAVIGATION
+:root {
+	--nav-height: 6rem;
+	
+    @media only screen and (min-width: 992px) {
+        --nav-height: 8rem;
+    }
+}
+
+$btn_hover_colour: rgba($black, .1);
+$default_box_shadow: 0px 2px 4px rgba($black, .05);
