@@ -23,37 +23,75 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'modway-shoes' ); ?></a>
+	<header class="header">
+		<div class="header-top">
+			<div class="container-fluid container-max header-container">
+				<!-- <ul class="header-top__list">
+					<li class="header-top__list-item"><a href="#" class="header-top__link">Shipping</a></li>
+					<li class="header-top__list-item"><a href="#" class="header-top__link">Returns</a></li>
+				</ul> -->
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$modway_shoes_description = get_bloginfo( 'description', 'display' );
-			if ( $modway_shoes_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $modway_shoes_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+				<div class="navigation-top">
+					<?php
+					wp_nav_menu(
+						array(
+							'menu_class' => 'navigation-top__list',
+							'container' => 'nav',
+							'container_class' => 'navigation-top__nav',
+							'theme_location' => 'top',
+						)
+					);
+					?>
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'modway-shoes' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+					<div class="connect">
+						<p class="connect__text">Connect with us</p>
+						<div class="connect__icons-container">
+							<a href="#">
+								<svg class="icon" aria-label="Facebook" aria-hidden="true">
+									<use xlink:href="<?php echo get_stylesheet_directory_uri() . '/assets/icons/symbol-defs.svg#icon-facebook'; ?>"></use>
+								</svg>
+							</a>
+							<a href="#">
+								<svg class="icon" aria-label="Instagram" aria-hidden="true">
+									<use xlink:href="<?php echo get_stylesheet_directory_uri() . '/assets/icons/symbol-defs.svg#icon-instagram'; ?>"></use>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="header-main">
+			<div class="container-fluid container-max header-container">
+				<div class="navigation">
+					<button class="navigation__btn" aria-label="Menu Toggle" tabindex="0">
+						<span class="navigation__icon"></span>
+					</button>
+
+					<a href="<?php echo site_url(); ?>" class="header__logo-box">
+						<img src="<?php echo get_stylesheet_directory_uri() . '/assets/brand/logo.png'; ?>" alt="Modway Shoes Logo" class="header__logo">
+					</a>
+
+					<?php
+					wp_nav_menu(
+						array(
+							'menu_class' => 'navigation__list',
+							'container' => 'nav',
+							'container_class' => 'navigation__nav',
+							'theme_location' => 'primary',
+						)
+					);
+					?>
+
+					<div class="navigation__right">
+						<a href="#" class="cart-link">
+							<svg class="icon icon-local_grocery_store">
+								<use xlink:href="<?php echo get_stylesheet_directory_uri() . '/assets/icons/symbol-defs.svg#icon-local_grocery_store'; ?>"></use>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
