@@ -1,15 +1,17 @@
 // COLOURS
 $white: #fff;
-$black: #000;
+$black: #1a1a1a;
+$accent: #e81c1c;
 
 // NAVIGATION
 :root {
-	--nav-height: 6rem;
-	
-    @media only screen and (min-width: 992px) {
-        --nav-height: 8rem;
-    }
+  --nav-top-height: 4rem;
+  --nav-main-height: 6rem;
+
+  @media only screen and (min-width: 992px) {
+    --nav-main-height: 8rem;
+  }
 }
 
-$btn_hover_colour: rgba($black, .1);
-$default_box_shadow: 0px 2px 4px rgba($black, .05);
+$btn_hover_colour: rgba($black, 0.1);
+$default_box_shadow: 0px 2px 4px rgba($black, 0.05);

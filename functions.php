@@ -122,36 +122,37 @@ add_action( 'after_setup_theme', 'modway_shoes_content_width', 0 );
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function modway_shoes_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'Sidebar', 'modway-shoes' ),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'modway-shoes' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-}
-add_action( 'widgets_init', 'modway_shoes_widgets_init' );
+// function modway_shoes_widgets_init() {
+// 	register_sidebar(
+// 		array(
+// 			'name'          => esc_html__( 'Sidebar', 'modway-shoes' ),
+// 			'id'            => 'sidebar-1',
+// 			'description'   => esc_html__( 'Add widgets here.', 'modway-shoes' ),
+// 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+// 			'after_widget'  => '</section>',
+// 			'before_title'  => '<h2 class="widget-title">',
+// 			'after_title'   => '</h2>',
+// 		)
+// 	);
+// }
+// add_action( 'widgets_init', 'modway_shoes_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
 function modway_shoes_scripts() {
 	// Bootstrap
-	wp_enqueue_style( 'bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', array(), _S_VERSION );
-	wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.5.1.slim.min.js', array(), _S_VERSION, true );
-	wp_enqueue_script( 'popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js', array(), _S_VERSION, true );
-	wp_enqueue_script( 'bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array(), _S_VERSION, true );
+	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap-grid.min.css', array(), _S_VERSION );
 	
 	// Custom
 	wp_enqueue_style( 'modway-shoes-style', get_stylesheet_uri(), array(), _S_VERSION );
 
-	wp_enqueue_script( 'modway-shoes-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-	wp_enqueue_script( 'modway-shoes-menu-toggle', get_template_directory_uri() . '/js/menu-toggle.js', array(), _S_VERSION, true );
+	// Custom Scripts
+	wp_enqueue_script( 'menu-toggle', get_template_directory_uri() . '/js/menu-toggle.js', array(), false, true );
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -187,9 +188,34 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
- * Load WooCommerce compatibility file.
+ * ========================================================
+ * 	WooCommerce Changes
+ * ========================================================
  */
-if ( class_exists( 'WooCommerce' ) ) {
-	require get_template_directory() . '/inc/woocommerce.php';
-}
 
+function modway_shoes_add_woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+	// add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
+}
+add_action( 'after_setup_theme', 'modway_shoes_add_woocommerce_support' );
+
+// Remove breadcrumbs
+remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
+
+// Disable default WooCommerce styles
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+
+
+// Remove tabs and add long description
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+add_action( 'woocommerce_single_product_summary', 'wc_output_long_description', 70 );
+  
+function wc_output_long_description() {
+?>
+   <div class="product__long-description">
+    <?php the_content(); ?>
+   </div>
+<?php
+}
