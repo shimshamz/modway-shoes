@@ -3,14 +3,11 @@
   "version": "1.0.0",
   "description": "Website for Modway Shoes",
   "scripts": {
-    "watch:sass": "node-sass sass/style.scss style.css -w",
-    "devserver": "live-server",
-    "start": "npm-run-all --parallel devserver watch:sass"
+    "watch:sass": "sass --watch --style=compressed sass/style.scss:style.css"
   },
   "author": "Shimshamz",
   "license": "ISC",
   "devDependencies": {
-    "node-sass": "^4.5.3",
-    "npm-run-all": "^4.1.1"
+    "sass": "^1.48.0"
   }
 }

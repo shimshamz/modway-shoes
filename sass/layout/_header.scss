@@ -1,10 +1,15 @@
 .header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+
     &-container {
         height: 100%;
     }
 
     &-top {
-        height: 4rem;
+        height: var(--nav-top-height);
         width: 100%;
         background-color: $black;
 
@@ -16,9 +21,16 @@
     }
 
     &-main {
-        height: var(--nav-height);
+        height: var(--nav-main-height);
+        background-color: $white;
         border-bottom: 1px solid rgba($black, .075);
         box-shadow: $default_box_shadow;
+
+        @media only screen and (max-width: 767px) {
+            .header-container {
+                padding: 0;
+            }
+        }
     }
 
     &__logo-box {
@@ -139,8 +151,8 @@
     .cart-link {
         @include flex-xy-center;
 
-        width: var(--nav-height);
-        height: var(--nav-height);
+        width: var(--nav-main-height);
+        height: var(--nav-main-height);
         transition: all .15s ease-in-out;
     }
 

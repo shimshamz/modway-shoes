@@ -1,47 +1,88 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-    // This defines what 1rem is
-    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+  // This defines what 1rem is
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
 }
 
 body {
-    box-sizing: border-box;
+  position: relative;
+  padding-top: calc(var(--nav-top-height) + var(--nav-main-height));
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
+  color: $black;
+}
+
+p,
+label,
+input {
+  font-size: 1.4rem;
+
+  @media only screen and (min-width: 992px) {
+    font-size: 1.6rem;
+  }
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
-.container,
-.container-fluid {
-    padding-right: 1rem;
-    padding-left: 1rem;
+// .container-slim {
+//   padding-right: 1rem;
+//   padding-left: 1rem;
 
-    @media only screen and (min-width: 768px) {
-        padding-right: 2rem;
-        padding-left: 2rem;
-    }
-}
-
-.container-max {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-}
+//   @media only screen and (min-width: 768px) {
+//     padding-right: 2rem;
+//     padding-left: 2rem;
+//   }
+// }
 
 a,
 a:hover {
-    color: $black;
-    text-decoration: none;
+  color: $black;
+  text-decoration: none;
 }
 
 .show {
-    display: block !important;
+  display: block !important;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.ms-main-container {
+  margin-top: 1.5rem;
+  padding-bottom: 3rem;
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 3rem;
+  }
+
+  @media only screen and (min-width: 992px) {
+    margin-top: 4rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container-max {
+    max-width: 1200px;
+  }
 }

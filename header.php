@@ -16,7 +16,8 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<?php wp_head(); ?>
 </head>
 
@@ -25,7 +26,7 @@
 <div id="page" class="site">
 	<header class="header">
 		<div class="header-top">
-			<div class="container-fluid container-max header-container">
+			<div class="container container-max header-container">
 				<!-- <ul class="header-top__list">
 					<li class="header-top__list-item"><a href="#" class="header-top__link">Shipping</a></li>
 					<li class="header-top__list-item"><a href="#" class="header-top__link">Returns</a></li>
@@ -63,7 +64,7 @@
 		</div>
 
 		<div class="header-main">
-			<div class="container-fluid container-max header-container">
+			<div class="container container-max header-container">
 				<div class="navigation">
 					<button class="navigation__btn" aria-label="Menu Toggle" tabindex="0">
 						<span class="navigation__icon"></span>
