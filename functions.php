@@ -153,10 +153,6 @@ function modway_shoes_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'modway_shoes_scripts' );
 
@@ -201,8 +197,13 @@ function modway_shoes_add_woocommerce_support() {
 }
 add_action( 'after_setup_theme', 'modway_shoes_add_woocommerce_support' );
 
-// Remove breadcrumbs
-remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
+// Remove breadcrumbs if single product page
+add_filter('woocommerce_before_main_content', 'remove_breadcrumbs');
+function remove_breadcrumbs() {
+	if (is_product()) {
+		remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
+	}
+}
 
 // Disable default WooCommerce styles
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
@@ -219,3 +220,46 @@ function wc_output_long_description() {
    </div>
 <?php
 }
+
+// Modify the default WooCommerce orderby dropdown
+// Options: menu_order, popularity, rating, date, price, price-desc
+// Remove menu_order
+function ms_woocommerce_catalog_orderby( $orderby ) {
+	unset($orderby["menu_order"]);
+	unset($orderby["rating"]);
+	return $orderby;
+}
+add_filter( "woocommerce_catalog_orderby", "ms_woocommerce_catalog_orderby", 30 );
+
+// Remove result count
+remove_action( 'woocommerce_before_shop_loop','woocommerce_result_count', 20 );
+
+// Remove ordering (moved into header)
+remove_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering', 30 );
+
+// Add custom class to product loop title
+function ms_woocommerce_product_loop_title_classes($class) {
+	return $class . ' ms-loop-item__title ms-loop-product__title';
+}
+add_filter( 'woocommerce_product_loop_title_classes', 'ms_woocommerce_product_loop_title_classes' );
+
+// Remove add-to-cart from product loop item
+remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
+
+// Remove count from category title
+remove_action( 'woocommerce_shop_loop_subcategory_title', 'woocommerce_template_loop_category_title', 10);
+function ms_woocommerce_template_loop_category_title( $category ) {
+	?>
+	<h2 class="woocommerce-loop-category__title ms-loop-item__title ms-loop-category__title">
+		<?php
+		echo esc_html( $category->name );
+
+		// if ( $category->count > 0 ) {
+		// 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		// 	echo apply_filters( 'woocommerce_subcategory_count_html', ' <mark class="count">(' . esc_html( $category->count ) . ')</mark>', $category );
+		// }
+		?>
+	</h2>
+	<?php
+}
+add_action( 'woocommerce_shop_loop_subcategory_title', 'ms_woocommerce_template_loop_category_title', 10);

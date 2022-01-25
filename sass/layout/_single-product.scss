@@ -2,7 +2,7 @@
   .woocommerce-breadcrumb {
     font-size: 1.2rem;
 
-    @media only screen and (min-width: 992px) {
+    @media only screen and (min-width: 768px) {
       font-size: 1.4rem;
     }
   }
@@ -186,13 +186,7 @@
     select {
       width: 18rem;
       margin-right: 1rem;
-      padding: 1rem 1.5rem 1rem 1rem;
       font-size: 1.4rem;
-      border: 2px solid $black;
-
-      &:focus {
-        outline: none;
-      }
     }
   }
 
@@ -272,16 +266,5 @@
       font-size: 1.4rem;
     }
   }
-}
-
-.ms-onsale {
-  padding: 0.5rem 1.2rem;
-  position: absolute;
-  color: $white;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  background-color: $black;
-  z-index: 15;
 }
 
