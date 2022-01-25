@@ -73,10 +73,12 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 @import "layout/navigation";
 @import "layout/header";
 @import "layout/footer";
+@import "layout/shop";
 @import "layout/single-product";
 
 /*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
-
+@import "components/onsale";
+@import "components/pagination";
 

@@ -1,0 +1,41 @@
+.ms-pagination {
+    --page-numbers-size: 4rem;
+
+    font-size: 1.6rem;
+    color: $black;
+
+    ul {
+        display: flex;
+        justify-content: center;
+
+        li {
+            span.page-numbers,
+            a.page-numbers {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                min-width: var(--page-numbers-size);
+                height: var(--page-numbers-size);
+                margin: 0.6rem;
+                padding: 1rem;
+                border: 2px solid rgb($black, 0.5);
+            }
+
+            span.page-numbers.current {
+                border-color: $black;
+            }
+
+            a.page-numbers {
+                &:hover {
+                    border-color: $accent;
+                }
+            }
+
+            .prev.page-numbers,
+            .next.page-numbers {
+                min-width: calc(var(--page-numbers-size) + 0.5rem);
+                padding-bottom: 1.2rem;
+            }
+        }
+    }
+}
