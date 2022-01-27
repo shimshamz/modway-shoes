@@ -52,6 +52,7 @@ if ( ! function_exists( 'modway_shoes_setup' ) ) :
 			array(
 				'primary' => esc_html__( 'Primary', 'modway-shoes' ),
 				'top' => esc_html__( 'Top', 'modway-shoes' ),
+				'footer' => esc_html__( 'Footer', 'modway-shoes' ),
 			)
 		);
 
