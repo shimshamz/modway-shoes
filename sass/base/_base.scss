@@ -15,6 +15,7 @@ body {
   position: relative;
   padding-top: calc(var(--nav-top-height) + var(--nav-main-height));
   box-sizing: border-box;
+  line-height: 1.5;
 }
 
 h1,
@@ -74,6 +75,7 @@ img {
 
   @media only screen and (min-width: 768px) {
     margin-top: 3rem;
+    padding-bottom: 4.5rem;
   }
 
   @media only screen and (min-width: 992px) {
